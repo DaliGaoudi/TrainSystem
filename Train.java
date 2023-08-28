@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Train {
-
+public abstract class Train implements SoundPlayer {
     private int ID;
     private String departure;
     private String destination;
-
     private List<Station> stations;
+    private Train_Types type;
 
     public Train(int ID, String departure, String destination) {
         this.ID = ID;
@@ -16,6 +15,9 @@ public class Train {
         this.stations = new ArrayList<>();
     }
 
+    public Train() {
+        this.stations = new ArrayList<>();
+    }
     public int getID() {
         return ID;
     }
@@ -48,6 +50,14 @@ public class Train {
         this.stations = stations;
     }
 
+    public Train_Types getType() {
+        return type;
+    }
+
+    public void setType(Train_Types type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Train{" +
@@ -56,5 +66,10 @@ public class Train {
                 ", destination='" + destination + '\'' +
                 ", stations=" + stations +
                 '}';
+    }
+
+    @Override
+    public void playSound() {
+        stations.forEach(Station::playSound);
     }
 }
